@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Basic Reset and Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            padding: 10px 20px;
+            margin: 20px auto;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .option-label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Subscription Section -->
+    <div id="subscription-section" class="container">
+        <h1>Welcome to the Quiz App</h1>
+        <p>Please subscribe to our YouTube channel to access the quiz.</p>
+        <button id="subscribe-btn">Subscribe to YouTube Channel</button>
+    </div>
+
+    <!-- Name Input Section -->
+    <div id="name-section" class="container" style="display: none;">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="username" placeholder="Your Name" />
+        <button id="start-quiz-btn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quiz-section" class="container" style="display: none;">
+        <h2 id="question-number"></h2>
+        <p id="question-text"></p>
+        <div id="options"></div>
+        <button id="next-btn">Next</button>
+    </div>
+
+    <!-- Result Section -->
+    <div id="result-section" class="container" style="display: none;">
+        <h2 id="result-message"></h2>
+        <button id="view-results-btn">View Your Answers</button>
+    </div>
+
+    <!-- Review Section -->
+    <div id="review-section" class="container" style="display: none;">
+        <h2>Review Your Answers</h2>
+        <div id="review-list"></div>
+        <button id="restart-btn">Restart Quiz</button>
+    </div>
+
+    <script>
+        // Questions stored in JSON
+        const questions = [
+            {
+                "question": "Which method of teaching is characterized by the teacher being the central authority and provider of knowledge?",
+                "options": [
+                    "Student-centered method",
+                    "Teacher-centered method",
+                    "Inquiry-based learning",
+                    "Cooperative learning"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In teacher-centered methods, what is the primary role of the teacher?",
+                "options": [
+                    "Facilitator of discussion",
+                    "Provider of knowledge",
+                    "Observer of student interactions",
+                    "Peer collaborator"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which technique is most commonly associated with teacher-centered teaching?",
+                "options": [
+                    "Group discussions",
+                    "Lecturing",
+                    "Hands-on experiments",
+                    "Peer teaching"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "What is the main advantage of teacher-centered methods?",
+                "options": [
+                    "Promotes independent learning",
+                    "Allows efficient transmission of information",
+                    "Encourages student creativity",
+                    "Fosters group collaboration"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In teacher-centered techniques, what is the common method for evaluating student learning?",
+                "options": [
+                    "Self-assessment",
+                    "Peer review",
+                    "Formal examinations",
+                    "Project-based assessments"
+                ],
+                "correctAnswer": 2
+            },
+            {
+                "question": "Which teaching strategy involves the teacher leading a structured lecture followed by Q&A sessions?",
+                "options": [
+                    "Flipped classroom",
+                    "Direct instruction",
+                    "Problem-based learning",
+                    "Cooperative learning"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which of the following is a technique used in teacher-centered teaching?",
+                "options": [
+                    "Demonstration",
+                    "Open-ended inquiry",
+                    "Collaborative group work",
+                    "Experiential learning"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "How does the teacher-centered method primarily deliver content?",
+                "options": [
+                    "Through student presentations",
+                    "Through textbooks and lectures",
+                    "Through online forums",
+                    "Through peer tutoring"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In teacher-centered methods, the teacher's feedback is typically:",
+                "options": [
+                    "Immediate and corrective",
+                    "Peer-mediated",
+                    "Self-guided by students",
+                    "Non-existent"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "Which strategy is often contrasted with teacher-centered methods?",
+                "options": [
+                    "Student-centered methods",
+                    "Authoritarian methods",
+                    "Traditional methods",
+                    "Direct instruction"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "What is a common criticism of teacher-centered methods?",
+                "options": [
+                    "They are too interactive.",
+                    "They may limit student engagement",
+                    "They are too chaotic.",
+                    "They do not provide clear structure"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In teacher-centered approaches, what is the teacher's role during classroom discussion?",
+                "options": [
+                    "Passive listener",
+                    "Active presenter",
+                    "Silent observer",
+                    "Peer collaborator"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which technique emphasizes structured content delivery by the teacher?",
+                "options": [
+                    "Socratic questioning",
+                    "Lecture method",
+                    "Group projects",
+                    "Brainstorming sessions"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Teacher-centered teaching is most effective in which scenario?",
+                "options": [
+                    "When students require high interactivity",
+                    "When rapid content delivery is necessary",
+                    "When exploring open-ended problems",
+                    "When encouraging collaborative learning"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "In a teacher-centered classroom, what is the usual format for lesson delivery?",
+                "options": [
+                    "Interactive simulations",
+                    "Monologic lectures",
+                    "Group-based projects",
+                    "Student-led seminars"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which of the following best describes teaching strategies in teacher-centered methods?",
+                "options": [
+                    "Flexible and student-led",
+                    "Structured and teacher-directed",
+                    "Inquiry-based and exploratory",
+                    "Collaborative and decentralized"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which method involves the teacher explaining content followed by student note-taking?",
+                "options": [
+                    "Direct instruction",
+                    "Inquiry learning",
+                    "Cooperative learning",
+                    "Problem-based learning"
+                ],
+                "correctAnswer": 0
+            },
+            {
+                "question": "Teacher-centered methods often rely on which assessment technique?",
+                "options": [
+                    "Formative assessments only",
+                    "Summative assessments",
+                    "Peer assessments",
+                    "Self-assessments"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which of the following best exemplifies a teacher-centred technique?",
+                "options": [
+                    "Open discussion forums",
+                    "Demonstration followed by guided practice",
+                    "Independent research projects",
+                    "Group brainstorming sessions"
+                ],
+                "correctAnswer": 1
+            },
+            {
+                "question": "Which teaching method is most likely to use pre-planned lectures and standardized tests?",
+                "options": [
+                    "Teacher-centered method",
+                    "Student-centered method",
+                    "Experiential learning",
+                    "Inquiry-based learning"
+                ],
+                "correctAnswer": 0
+            }
+        ];
+
+        // Global Variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        let userName = "";
+
+        // DOM Elements
+        const subscriptionSection = document.getElementById("subscription-section");
+        const nameSection = document.getElementById("name-section");
+        const quizSection = document.getElementById("quiz-section");
+        const resultSection = document.getElementById("result-section");
+        const reviewSection = document.getElementById("review-section");
+
+        const subscribeBtn = document.getElementById("subscribe-btn");
+        const startQuizBtn = document.getElementById("start-quiz-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const viewResultsBtn = document.getElementById("view-results-btn");
+        const restartBtn = document.getElementById("restart-btn");
+
+        const questionNumberElem = document.getElementById("question-number");
+        const questionTextElem = document.getElementById("question-text");
+        const optionsElem = document.getElementById("options");
+        const resultMessageElem = document.getElementById("result-message");
+        const reviewListElem = document.getElementById("review-list");
+
+        // Subscription: Open YouTube channel link and then allow the user to proceed
+        subscribeBtn.addEventListener("click", () => {
+            window.open('https://youtube.com/@genielabgh', '_blank');
+            alert("Please subscribe to our YouTube channel and then click OK to proceed.");
+            subscriptionSection.style.display = "none";
+            nameSection.style.display = "block";
+        });
+
+        // Start Quiz: Ask for user's name
+        startQuizBtn.addEventListener("click", () => {
+            const nameInput = document.getElementById("username").value.trim();
+            if (nameInput === "") {
+                alert("Please enter your name to start the quiz.");
+                return;
+            }
+            userName = nameInput;
+            nameSection.style.display = "none";
+            quizSection.style.display = "block";
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            showQuestion();
+        });
+
+        // Display current question
+        function showQuestion() {
+            optionsElem.innerHTML = "";
+            const questionData = questions[currentQuestion];
+            questionNumberElem.textContent = "Question " + (currentQuestion + 1) + " of " + questions.length;
+            questionTextElem.textContent = questionData.question;
+            // Create radio button options
+            questionData.options.forEach((option, index) => {
+                const optionLabel = document.createElement("label");
+                optionLabel.classList.add("option-label");
+                const radioInput = document.createElement("input");
+                radioInput.type = "radio";
+                radioInput.name = "option";
+                radioInput.value = index;
+                optionLabel.appendChild(radioInput);
+                optionLabel.appendChild(document.createTextNode(" " + option));
+                optionsElem.appendChild(optionLabel);
+            });
+        }
+
+        // Next button: Record answer and move to next question
+        nextBtn.addEventListener("click", () => {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (!selectedOption) {
+                alert("Please select an answer.");
+                return;
+            }
+            const answer = parseInt(selectedOption.value);
+            userAnswers.push(answer);
+            if (answer === questions[currentQuestion].correctAnswer) {
+                score++;
+            }
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        });
+
+        // Display Result with congratulatory message and confetti
+        function showResult() {
+            quizSection.style.display = "none";
+            resultSection.style.display = "block";
+            resultMessageElem.textContent = "Congratulations " + userName + "! You scored " + score + " out of " + questions.length + ".";
+            // Trigger confetti animation
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // View Answers: Show review of correct and incorrect answers
+        viewResultsBtn.addEventListener("click", () => {
+            resultSection.style.display = "none";
+            reviewSection.style.display = "block";
+            displayReview();
+        });
+
+        // Restart Quiz: Allow user to restart the quiz
+        restartBtn.addEventListener("click", () => {
+            reviewSection.style.display = "none";
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            quizSection.style.display = "block";
+            showQuestion();
+        });
+
+        // Display review list of questions and answers
+        function displayReview() {
+            reviewListElem.innerHTML = "";
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correctAnswer;
+                const questionReview = document.createElement("div");
+                questionReview.classList.add("question-review");
+                questionReview.innerHTML =
+                    "<strong>Q" + (index + 1) + ":</strong> " + q.question + "<br>" +
+                    "<strong>Your answer:</strong> " + q.options[userAnswer] + " " +
+                    (isCorrect ? "&#10004;" : "&#10008;") + "<br>" +
+                    "<strong>Correct answer:</strong> " + q.options[q.correctAnswer] + "<br><br>";
+                reviewListElem.appendChild(questionReview);
+            });
+        }
+    </script>
+</body>
+
+</html>
