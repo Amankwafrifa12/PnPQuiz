@@ -3,453 +3,876 @@
 
 <head>
     <meta charset="UTF-8" />
+    <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz App</title>
-    <!-- Canvas Confetti CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <!-- Primary Meta Tags -->
+    <title>PnPQuiz | GenieDev</title>
+    <meta name="title" content="PnP Quiz App | GenieDev">
+    <meta name="description"
+        content="Take the PnP Quiz App by GenieDev and test your knowledge on PnP topics. Learn, challenge yourself, and have fun with interactive questions.">
+    <meta name="keywords" content="PnP, Quiz, GenieLab, Education, PnP Quiz, interactive quiz">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://genielab.rf.gd">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://genielab.rf.gd">
+    <meta property="og:title" content="PnP Quiz App | GenieLab">
+    <meta property="og:description" content="Take the PnP Quiz App by GenieDev and test your knowledge on PnP topics.">
+    <meta property="og:image" content="https://genielab.rf.gd/images/assets/4.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://genielab.rf.gd">
+    <meta property="twitter:title" content="PnP Quiz App | GenieLab">
+    <meta property="twitter:description"
+        content="Take the PnP Quiz App by GenieDev and test your knowledge on PnP topics.">
+    <meta property="twitter:image" content="https://genielab.rf.gd/images/assets/4.jpg">
+
     <style>
-        /* Basic Reset and Styling */
+        /* Mobile-first styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f4f4f4;
+            background: #f2f2f2;
+            color: #333;
         }
 
         .container {
-            max-width: 800px;
-            margin: 50px auto;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Popup overlay styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup {
             background: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-        }
-
-        h1,
-        h2 {
             text-align: center;
-        }
-
-        p {
-            text-align: center;
+            width: 90%;
+            max-width: 400px;
         }
 
         button {
-            display: block;
             padding: 10px 20px;
-            margin: 20px auto;
-            background: #007BFF;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .subscribe-btn {
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+        .start-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        #next-btn,
+        #prev-btn {
+            display: none;
+            /* Initially hidden */
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #28a745;
+            /* Green background */
             color: #fff;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        input[type="text"] {
-            width: calc(100% - 24px);
-            padding: 10px;
-            margin: 0 auto;
-            display: block;
-            border: 1px solid #ccc;
             border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
 
-        .option-label {
-            display: block;
+        #next-btn:hover {
+            background-color: #218838;
+            /* Darker green on hover */
+        }
+
+        .option-btn {
+            width: 100%;
             margin: 10px 0;
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Larger screens */
+        @media (min-width: 768px) {
             .container {
-                margin: 20px;
-                padding: 15px;
+                margin: 40px auto;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Subscription Section -->
-    <div id="subscription-section" class="container">
-        <h1>Welcome to the Quiz App</h1>
-        <p>Please subscribe to our YouTube channel to access the quiz.</p>
-        <button id="subscribe-btn">Subscribe to YouTube Channel</button>
+    <!-- Popup with two buttons and contact info -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <h1>PnPQuiz - GenieDev</h1>
+            <p>Please support us by subscribing to our channel for more of this</p>
+            <div>
+                <button class="subscribe-btn" id="subscribe-btn">Subscribe</button>
+                <button class="start-btn" id="start-btn">Start Quiz</button>
+            </div>
+            <p>Contact us: +233592725542 | Email: genielabgh@gmail.com</p>
+        </div>
     </div>
 
-    <!-- Name Input Section -->
-    <div id="name-section" class="container" style="display: none;">
-        <h2>Enter Your Name</h2>
-        <input type="text" id="username" placeholder="Your Name" />
-        <button id="start-quiz-btn">Start Quiz</button>
-    </div>
+    <!-- Main quiz container -->
+    <div class="container" id="quiz-container" style="display: none;">
+        <div id="welcome" style="text-align: center;">
+            <h2>PnPQuiz - GenieDev</h2>
+        </div>
+        <div id="quiz">
+            <div id="question-container">
+                <div class="button" style="display: flex; justify-content: space-between;">
+                    <h4 id="question-number"></h4>
+                    <button id="restart-btn" style="background-color: #333; color: #f2f2f2;">Restart</button>
+                </div>
 
-    <!-- Quiz Section -->
-    <div id="quiz-section" class="container" style="display: none;">
-        <h2 id="question-number"></h2>
-        <p id="question-text"></p>
-        <div id="options"></div>
-        <button id="next-btn">Next</button>
-    </div>
+                <h3 id="question-text"></h3>
+                <div id="options-container"></div>
 
-    <!-- Result Section -->
-    <div id="result-section" class="container" style="display: none;">
-        <h2 id="result-message"></h2>
-        <button id="view-results-btn">View Your Answers</button>
-    </div>
+                <!-- Replace the original two button declarations with this container -->
+                <div id="nav-buttons"
+                    style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                    <button id="prev-btn" style="display: none;">Previous</button>
+                    <button id="next-btn">Next</button>
+                </div>
 
-    <!-- Review Section -->
-    <div id="review-section" class="container" style="display: none;">
-        <h2>Review Your Answers</h2>
-        <div id="review-list"></div>
-        <button id="restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+
+        <div id="feedback"></div>
+        <div id="score-container" style="margin-top: 20px;">
+            Score: <span id="score">0</span>/<span id="total">0</span>
+        </div>
+    </div>
     </div>
 
     <script>
-        // Questions stored in JSON
+        // Sample quiz data extracted from the PDF.
+        // (You can use an external JSON file and fetch it if needed.)
         const questions = [
             {
-                "question": "Which method of teaching is characterized by the teacher being the central authority and provider of knowledge?",
-                "options": [
-                    "Student-centered method",
-                    "Teacher-centered method",
-                    "Inquiry-based learning",
-                    "Cooperative learning"
-                ],
-                "correctAnswer": 1
+                "question": "Which teaching method focuses primarily on the teacher delivering content while students passively receive information?",
+                "options": ["Teacher-centred method", "Learner-centred method", "Collaborative method", "Enquiry-based learning"],
+                "answer": "Teacher-centred method"
             },
             {
-                "question": "In teacher-centered methods, what is the primary role of the teacher?",
-                "options": [
-                    "Facilitator of discussion",
-                    "Provider of knowledge",
-                    "Observer of student interactions",
-                    "Peer collaborator"
-                ],
-                "correctAnswer": 1
+                "question": "What is a key characteristic of teacher-centred methods?",
+                "options": ["Active student participation", "Minimal teacher control", "Teacher as the primary knowledge source", "Self-directed learning"],
+                "answer": "Teacher as the primary knowledge source"
             },
             {
-                "question": "Which technique is most commonly associated with teacher-centered teaching?",
-                "options": [
-                    "Group discussions",
-                    "Lecturing",
-                    "Hands-on experiments",
-                    "Peer teaching"
-                ],
-                "correctAnswer": 1
+                "question": "Which of the following is a common technique used in teacher-centred methods?",
+                "options": ["Lecturing", "Group discussions", "Project-based learning", "Role-playing"],
+                "answer": "Lecturing"
             },
             {
-                "question": "What is the main advantage of teacher-centered methods?",
-                "options": [
-                    "Promotes independent learning",
-                    "Allows efficient transmission of information",
-                    "Encourages student creativity",
-                    "Fosters group collaboration"
-                ],
-                "correctAnswer": 1
+                "question": "Which of these best describes a learner-centred approach?",
+                "options": ["Teacher dictates learning", "Students explore and discover knowledge", "Students passively receive information", "Rigid and structured lesson plans"],
+                "answer": "Students explore and discover knowledge"
             },
             {
-                "question": "In teacher-centered techniques, what is the common method for evaluating student learning?",
-                "options": [
-                    "Self-assessment",
-                    "Peer review",
-                    "Formal examinations",
-                    "Project-based assessments"
-                ],
-                "correctAnswer": 2
+                "question": "Which of these is NOT a characteristic of learner-centred teaching?",
+                "options": ["Encourages student autonomy", "Facilitates active participation", "Emphasises rote memorisation", "Promotes critical thinking"],
+                "answer": "Emphasises rote memorisation"
             },
             {
-                "question": "Which teaching strategy involves the teacher leading a structured lecture followed by Q&A sessions?",
-                "options": [
-                    "Flipped classroom",
-                    "Direct instruction",
-                    "Problem-based learning",
-                    "Cooperative learning"
-                ],
-                "correctAnswer": 1
+                "question": "What is a major disadvantage of learner-centred teaching?",
+                "options": ["Encourages engagement", "Requires more time for planning", "Develops critical thinking", "Promotes problem-solving skills"],
+                "answer": "Requires more time for planning"
             },
             {
-                "question": "Which of the following is a technique used in teacher-centered teaching?",
-                "options": [
-                    "Demonstration",
-                    "Open-ended inquiry",
-                    "Collaborative group work",
-                    "Experiential learning"
-                ],
-                "correctAnswer": 0
+                "question": "Which of these is a key feature of active learning?",
+                "options": ["Passive listening", "Memorisation of facts", "Student engagement in activities", "Teacher-focused instruction"],
+                "answer": "Student engagement in activities"
             },
             {
-                "question": "How does the teacher-centered method primarily deliver content?",
-                "options": [
-                    "Through student presentations",
-                    "Through textbooks and lectures",
-                    "Through online forums",
-                    "Through peer tutoring"
-                ],
-                "correctAnswer": 1
+                "question": "Which learning method involves students working together towards a common goal?",
+                "options": ["Individual learning", "Experiential learning", "Collaborative learning", "Lecture method"],
+                "answer": "Collaborative learning"
             },
             {
-                "question": "In teacher-centered methods, the teacher's feedback is typically:",
-                "options": [
-                    "Immediate and corrective",
-                    "Peer-mediated",
-                    "Self-guided by students",
-                    "Non-existent"
-                ],
-                "correctAnswer": 0
+                "question": "What is the main goal of problem-based learning?",
+                "options": ["Memorising key facts", "Solving real-world problems", "Following rigid lesson plans", "Receiving knowledge from the teacher"],
+                "answer": "Solving real-world problems"
             },
             {
-                "question": "Which strategy is often contrasted with teacher-centered methods?",
-                "options": [
-                    "Student-centered methods",
-                    "Authoritarian methods",
-                    "Traditional methods",
-                    "Direct instruction"
-                ],
-                "correctAnswer": 0
+                "question": "Which of these techniques is used in play-based learning?",
+                "options": ["Rote memorisation", "Reflect-Connect-Apply (RCA) technique", "Lecture method", "Rigid curriculum adherence"],
+                "answer": "Reflect-Connect-Apply (RCA) technique"
             },
             {
-                "question": "What is a common criticism of teacher-centered methods?",
-                "options": [
-                    "They are too interactive.",
-                    "They may limit student engagement",
-                    "They are too chaotic.",
-                    "They do not provide clear structure"
-                ],
-                "correctAnswer": 1
+                "question": "What distinguishes teacher-centred teaching from learner-centred teaching?",
+                "options": ["Teacher leads instruction", "Student exploration", "Group collaboration", "Peer teaching"],
+                "answer": "Teacher leads instruction"
             },
             {
-                "question": "In teacher-centered approaches, what is the teacher's role during classroom discussion?",
-                "options": [
-                    "Passive listener",
-                    "Active presenter",
-                    "Silent observer",
-                    "Peer collaborator"
-                ],
-                "correctAnswer": 1
+                "question": "In teacher-centred instruction, what is the primary role of the teacher?",
+                "options": ["Facilitator of discussion", "Source of knowledge", "Observer of student behavior", "Peer collaborator"],
+                "answer": "Source of knowledge"
             },
             {
-                "question": "Which technique emphasizes structured content delivery by the teacher?",
-                "options": [
-                    "Socratic questioning",
-                    "Lecture method",
-                    "Group projects",
-                    "Brainstorming sessions"
-                ],
-                "correctAnswer": 1
+                "question": "Which teaching technique is typically associated with teacher-centred methods?",
+                "options": ["Lecturing", "Brainstorming", "Peer assessment", "Role-playing"],
+                "answer": "Lecturing"
             },
             {
-                "question": "Teacher-centered teaching is most effective in which scenario?",
-                "options": [
-                    "When students require high interactivity",
-                    "When rapid content delivery is necessary",
-                    "When exploring open-ended problems",
-                    "When encouraging collaborative learning"
-                ],
-                "correctAnswer": 1
+                "question": "Teacher-centred strategies often include which of the following?",
+                "options": ["Demonstration", "Group work", "Collaborative projects", "Inquiry-based learning"],
+                "answer": "Demonstration"
             },
             {
-                "question": "In a teacher-centered classroom, what is the usual format for lesson delivery?",
-                "options": [
-                    "Interactive simulations",
-                    "Monologic lectures",
-                    "Group-based projects",
-                    "Student-led seminars"
-                ],
-                "correctAnswer": 1
+                "question": "A teacher-centred method is best described as:",
+                "options": ["Direct instruction", "Student-led discussion", "Peer feedback sessions", "Open-ended inquiry"],
+                "answer": "Direct instruction"
             },
             {
-                "question": "Which of the following best describes teaching strategies in teacher-centered methods?",
-                "options": [
-                    "Flexible and student-led",
-                    "Structured and teacher-directed",
-                    "Inquiry-based and exploratory",
-                    "Collaborative and decentralized"
-                ],
-                "correctAnswer": 1
+                "question": "What is the main focus of teacher-centred techniques?",
+                "options": ["Content delivery", "Student self-assessment", "Group discussion", "Learning autonomy"],
+                "answer": "Content delivery"
             },
             {
-                "question": "Which method involves the teacher explaining content followed by student note-taking?",
-                "options": [
-                    "Direct instruction",
-                    "Inquiry learning",
-                    "Cooperative learning",
-                    "Problem-based learning"
-                ],
-                "correctAnswer": 0
+                "question": "In teacher-centred learning, the teacher's planning is primarily aimed at:",
+                "options": ["Guiding student exploration", "Delivering predetermined content", "Facilitating group interaction", "Encouraging independent research"],
+                "answer": "Delivering predetermined content"
             },
             {
-                "question": "Teacher-centered methods often rely on which assessment technique?",
-                "options": [
-                    "Formative assessments only",
-                    "Summative assessments",
-                    "Peer assessments",
-                    "Self-assessments"
-                ],
-                "correctAnswer": 1
+                "question": "Which statement best reflects teacher-centred methods?",
+                "options": ["Students construct knowledge together", "The teacher delivers content systematically", "Students explore topics in a self-directed manner", "Learning is based on student inquiry"],
+                "answer": "The teacher delivers content systematically"
             },
             {
-                "question": "Which of the following best exemplifies a teacher-centred technique?",
-                "options": [
-                    "Open discussion forums",
-                    "Demonstration followed by guided practice",
-                    "Independent research projects",
-                    "Group brainstorming sessions"
-                ],
-                "correctAnswer": 1
+                "question": "Teacher-centred techniques often involve which of the following activities?",
+                "options": ["Direct explanation", "Collaborative learning", "Peer tutoring", "Self-guided inquiry"],
+                "answer": "Direct explanation"
             },
             {
-                "question": "Which teaching method is most likely to use pre-planned lectures and standardized tests?",
-                "options": [
-                    "Teacher-centered method",
-                    "Student-centered method",
-                    "Experiential learning",
-                    "Inquiry-based learning"
-                ],
-                "correctAnswer": 0
+                "question": "Which method emphasizes structured lesson plans and direct instruction?",
+                "options": ["Teacher-centred method", "Learner-centred method", "Constructivist method", "Inquiry-based method"],
+                "answer": "Teacher-centred method"
+            },
+            {
+                "question": "What is the main focus of the learner-centred method?",
+                "options": ["Teacher-led lectures", "Student exploration", "Direct instruction", "Standardized testing"],
+                "answer": "Student exploration"
+            },
+            {
+                "question": "Which of the following is a characteristic of learner-centred teaching?",
+                "options": ["Passive reception", "Student autonomy", "Teacher dominance", "Rigid curricula"],
+                "answer": "Student autonomy"
+            },
+            {
+                "question": "In learner-centred classrooms, teachers are expected to act as:",
+                "options": ["Directors of knowledge", "Facilitators", "Information dispensers", "Observers only"],
+                "answer": "Facilitators"
+            },
+            {
+                "question": "One disadvantage of learner-centred teaching is that it may:",
+                "options": ["Promote dependency", "Lack structure", "Require more planning time", "Reduce student engagement"],
+                "answer": "Require more planning time"
+            },
+            {
+                "question": "Learner-centred teaching often encourages students to:",
+                "options": ["Memorise information", "Engage in self-directed learning", "Sit passively", "Rely solely on textbooks"],
+                "answer": "Engage in self-directed learning"
+            },
+            {
+                "question": "Which teaching technique is commonly used in learner-centred approaches?",
+                "options": ["Group discussions", "Teacher lectures", "Rote learning", "Direct questioning"],
+                "answer": "Group discussions"
+            },
+            {
+                "question": "The learner-centred approach typically promotes:",
+                "options": ["Uniform instruction", "Personalised learning experiences", "Fixed lesson plans", "Examination-driven teaching"],
+                "answer": "Personalised learning experiences"
+            },
+            {
+                "question": "A key advantage of learner-centred teaching is:",
+                "options": ["Minimising teacher workload", "Enhancing student engagement", "Simplifying lesson planning", "Maintaining strict control"],
+                "answer": "Enhancing student engagement"
+            },
+            {
+                "question": "Which statement best represents the learner-centred approach?",
+                "options": ["Students take responsibility for their learning", "Teachers dictate every detail of the lesson", "Learning is unidirectional", "Instruction is solely teacher-led"],
+                "answer": "Students take responsibility for their learning"
+            },
+            {
+                "question": "Learner-centred teaching requires:",
+                "options": ["Less classroom management", "Increased teacher preparation", "Standardised testing", "Uniform instruction for all students"],
+                "answer": "Increased teacher preparation"
+            },
+            {
+                "question": "In learner-centred methods, the teacher’s role shifts to:",
+                "options": ["Instructor and evaluator", "Information provider", "Facilitator and guide", "Sole authority"],
+                "answer": "Facilitator and guide"
+            },
+            {
+                "question": "Which of these best describes learner-centred techniques?",
+                "options": ["Direct instruction", "Collaborative projects", "Passive note-taking", "Uniform teaching methods"],
+                "answer": "Collaborative projects"
+            },
+            {
+                "question": "Learner-centred teaching is particularly effective in promoting:",
+                "options": ["Memorisation", "Critical thinking", "Teacher dependency", "Uniformity of thought"],
+                "answer": "Critical thinking"
+            },
+            {
+                "question": "One challenge often associated with learner-centred methods is:",
+                "options": ["Lack of student engagement", "Difficulty in assessing progress", "Excessive teacher control", "Simplistic lesson structure"],
+                "answer": "Difficulty in assessing progress"
+            },
+            {
+                "question": "Which of the following is an example of learner-centred technique?",
+                "options": ["Case studies", "Sermon-style lectures", "Note recitation", "Direct information delivery"],
+                "answer": "Case studies"
+            },
+            {
+                "question": "What does integrated pedagogy combine in teaching?",
+                "options": ["Multiple subjects and methods", "Only teacher-centred methods", "Isolated lesson planning", "Strict adherence to textbooks"],
+                "answer": "Multiple subjects and methods"
+            },
+            {
+                "question": "Which pedagogy involves students actively engaging with materials and ideas?",
+                "options": ["Active learning", "Passive learning", "Teacher lecture", "Rote memorisation"],
+                "answer": "Active learning"
+            },
+            {
+                "question": "In collaborative learning, students primarily learn through:",
+                "options": ["Individual study", "Working together in groups", "Teacher lecturing", "Independent research"],
+                "answer": "Working together in groups"
+            },
+            {
+                "question": "What is a key benefit of experiential learning?",
+                "options": ["Memorisation of facts", "Real-life experience and reflection", "Passive listening", "Rigid testing methods"],
+                "answer": "Real-life experience and reflection"
+            },
+            {
+                "question": "Guided discovery learning primarily involves:",
+                "options": ["Teacher giving all answers", "Students discovering concepts with teacher guidance", "Strict curriculum adherence", "Random information recall"],
+                "answer": "Students discovering concepts with teacher guidance"
+            },
+            {
+                "question": "Enquiry-based learning encourages students to:",
+                "options": ["Accept information without question", "Ask questions and explore answers", "Memorise content", "Rely solely on textbooks"],
+                "answer": "Ask questions and explore answers"
+            },
+            {
+                "question": "Problem-based learning is best suited for:",
+                "options": ["Abstract theoretical study", "Real-world problem solving", "Passive note-taking", "Simple memorisation tasks"],
+                "answer": "Real-world problem solving"
+            },
+            {
+                "question": "Which method emphasizes hands-on projects to facilitate learning?",
+                "options": ["Project-based learning", "Lecture-based learning", "Standardised testing", "Direct instruction"],
+                "answer": "Project-based learning"
+            },
+            {
+                "question": "Integrated pedagogies are designed to:",
+                "options": ["Isolate subjects from each other", "Enhance interdisciplinary connections", "Limit creative thinking", "Focus only on academic content"],
+                "answer": "Enhance interdisciplinary connections"
+            },
+            {
+                "question": "Active learning strategies typically involve:",
+                "options": ["Passive absorption of facts", "Student participation and interaction", "Repetitive drills", "Teacher-only demonstration"],
+                "answer": "Student participation and interaction"
+            },
+            {
+                "question": "Which of these is a characteristic of collaborative learning?",
+                "options": ["Competitive individual tasks", "Shared goals and teamwork", "Teacher-led activities", "Independent assignments"],
+                "answer": "Shared goals and teamwork"
+            },
+            {
+                "question": "Experiential learning is based on the idea that:",
+                "options": ["Learning occurs only in classrooms", "Experience plays a central role in learning", "Teachers must control all aspects", "Only theory matters in education"],
+                "answer": "Experience plays a central role in learning"
+            },
+            {
+                "question": "What distinguishes guided discovery learning from direct instruction?",
+                "options": ["Teacher reveals answers immediately", "Students find solutions with subtle guidance", "No teacher involvement", "Use of textbooks only"],
+                "answer": "Students find solutions with subtle guidance"
+            },
+            {
+                "question": "Enquiry-based learning supports student learning by:",
+                "options": ["Discouraging curiosity", "Encouraging investigation", "Providing pre-determined answers", "Suppressing questions"],
+                "answer": "Encouraging investigation"
+            },
+            {
+                "question": "Which teaching method often involves a scenario that requires problem solving?",
+                "options": ["Project-based learning", "Passive lecture", "Standardised testing", "Direct memorisation"],
+                "answer": "Project-based learning"
+            },
+            {
+                "question": "A key component of integrated pedagogies is:",
+                "options": ["Segregation of subjects", "Blending different teaching strategies", "Focusing solely on theoretical knowledge", "Eliminating practical application"],
+                "answer": "Blending different teaching strategies"
+            },
+            {
+                "question": "In active learning, the teacher's role is to:",
+                "options": ["Dictate information", "Facilitate student engagement", "Observe silently", "Deliver long lectures"],
+                "answer": "Facilitate student engagement"
+            },
+            {
+                "question": "Which of the following is a form of integrated pedagogy?",
+                "options": ["Isolated skill drills", "Interdisciplinary projects", "Memorisation of isolated facts", "Siloed subject teaching"],
+                "answer": "Interdisciplinary projects"
+            },
+            {
+                "question": "The concept of experiential learning is best summarized as:",
+                "options": ["Learning by doing", "Learning by listening", "Learning by observing others", "Learning by rote repetition"],
+                "answer": "Learning by doing"
+            },
+            {
+                "question": "What does play-based learning primarily emphasize?",
+                "options": ["Structured lectures", "Learning through play", "Rote memorisation", "Strict testing"],
+                "answer": "Learning through play"
+            },
+            {
+                "question": "Which of the following best describes play-based learning?",
+                "options": ["Teacher-centered instruction", "Child-led exploration", "Standardised curriculum", "Examination preparation"],
+                "answer": "Child-led exploration"
+            },
+            {
+                "question": "One core competency of play-based learning is:",
+                "options": ["Memorisation of facts", "Social interaction", "Passive listening", "Repetitive drills"],
+                "answer": "Social interaction"
+            },
+            {
+                "question": "The Reflect-Connect-Apply (RCA) technique is used to:",
+                "options": ["Promote rote learning", "Encourage reflective thinking", "Deliver content without engagement", "Discourage creative thinking"],
+                "answer": "Encourage reflective thinking"
+            },
+            {
+                "question": "Benefits of the Reflect-Connect-Apply (RCA) discussion include:",
+                "options": ["Limiting student expression", "Enhancing understanding through reflection", "Focusing only on factual recall", "Discouraging open-ended questions"],
+                "answer": "Enhancing understanding through reflection"
+            },
+            {
+                "question": "Learning through Play (LTP) supports the development of:",
+                "options": ["Rigid academic skills", "Holistic development", "Isolated knowledge areas", "Standardised test performance"],
+                "answer": "Holistic development"
+            },
+            {
+                "question": "Characteristics of playful learning experiences include:",
+                "options": ["Structured and formal", "Creative and engaging", "Boring and repetitive", "Teacher-dominated"],
+                "answer": "Creative and engaging"
+            },
+            {
+                "question": "Which type of play involves spontaneous and unstructured activity?",
+                "options": ["Structured play", "Free play", "Rule-based play", "Competitive play"],
+                "answer": "Free play"
+            },
+            {
+                "question": "In play-based learning, the role of the teacher is to:",
+                "options": ["Control every activity", "Facilitate and observe", "Dictate play rules strictly", "Minimize student interaction"],
+                "answer": "Facilitate and observe"
+            },
+            {
+                "question": "The need to promote play in teaching and learning arises from:",
+                "options": ["Lack of creative expression", "Excessive focus on memorisation", "All of the above", "None of the above"],
+                "answer": "All of the above"
+            },
+            {
+                "question": "Play-based learning is particularly effective for developing:",
+                "options": ["Physical, cognitive, and social skills", "Only academic skills", "Isolated motor skills", "Standardised test skills"],
+                "answer": "Physical, cognitive, and social skills"
+            },
+            {
+                "question": "Which of these is an example of guided play?",
+                "options": ["Strict teacher instruction", "Teacher facilitates exploration", "No teacher involvement", "Only structured tasks"],
+                "answer": "Teacher facilitates exploration"
+            },
+            {
+                "question": "Reflect-Connect-Apply (RCA) technique is designed to help students:",
+                "options": ["Avoid reflection", "Connect experiences with learning", "Focus solely on the teacher's lecture", "Memorise without context"],
+                "answer": "Connect experiences with learning"
+            },
+            {
+                "question": "One benefit of play-based learning is:",
+                "options": ["Reduced engagement", "Increased creativity", "Limited social interaction", "Decreased motivation"],
+                "answer": "Increased creativity"
+            },
+            {
+                "question": "Which of the following types of play is structured with rules and objectives?",
+                "options": ["Free play", "Constructive play", "Rule-based play", "Spontaneous play"],
+                "answer": "Rule-based play"
+            },
+            {
+                "question": "Experiential learning in a play-based context involves:",
+                "options": ["Learning through abstract theory", "Learning through active engagement", "Passive observation", "Repetitive drilling"],
+                "answer": "Learning through active engagement"
+            },
+            {
+                "question": "In play-based learning, modifying play activities should consider:",
+                "options": ["Students' interests and developmental needs", "Only teacher preferences", "Fixed curriculum without changes", "Strict adherence to tests"],
+                "answer": "Students' interests and developmental needs"
+            },
+            {
+                "question": "Which statement best summarizes the conclusion of play-based learning methodologies?",
+                "options": ["Play undermines academic rigor", "Play enhances overall learning experiences", "Play is irrelevant in education", "Play only benefits physical skills"],
+                "answer": "Play enhances overall learning experiences"
+            },
+            {
+                "question": "The core idea behind play-based learning is to:",
+                "options": ["Eliminate structure completely", "Integrate fun with learning", "Replace academic content", "Avoid teacher guidance"],
+                "answer": "Integrate fun with learning"
+            },
+            {
+                "question": "Play-based learning often results in:",
+                "options": ["Increased student engagement", "Decreased classroom interaction", "Uniform learning experiences", "Limited emotional development"],
+                "answer": "Increased student engagement"
+            },
+            {
+                "question": "The Reflect-Connect-Apply (RCA) discussion strategy primarily fosters:",
+                "options": ["Surface-level learning", "Deep learning and reflection", "Passive note-taking", "Quick recall without understanding"],
+                "answer": "Deep learning and reflection"
+            },
+            {
+                "question": "One key factor in modifying play activities is to:",
+                "options": ["Ignore student feedback", "Adapt to students' developmental stages", "Use the same play activity for all", "Focus solely on teacher’s expertise"],
+                "answer": "Adapt to students' developmental stages"
+            },
+            {
+                "question": "Learning through Play (LTP) benefits include:",
+                "options": ["Reduced creativity", "Enhanced problem-solving", "Decreased interaction", "Increased anxiety"],
+                "answer": "Enhanced problem-solving"
+            },
+            {
+                "question": "Play-based learning environments are typically characterized by:",
+                "options": ["Rigid seating arrangements", "Flexible and open spaces", "Strict teacher control", "Limited student movement"],
+                "answer": "Flexible and open spaces"
+            },
+            {
+                "question": "What is the primary objective of the Reflect-Connect-Apply (RCA) technique?",
+                "options": ["To entertain without learning", "To bridge experience and understanding", "To focus solely on fun", "To standardise test results"],
+                "answer": "To bridge experience and understanding"
+            },
+            {
+                "question": "Which aspect is crucial when designing play-based learning activities?",
+                "options": ["Relevance to student interests", "Ignoring cultural backgrounds", "Strict adherence to a fixed format", "Avoiding physical movement"],
+                "answer": "Relevance to student interests"
+            },
+            {
+                "question": "In play-based learning, what is the role of reflection?",
+                "options": ["It is unnecessary", "It consolidates learning from play", "It delays the learning process", "It is only for assessment"],
+                "answer": "It consolidates learning from play"
+            },
+            {
+                "question": "Play-based learning supports which type of skills?",
+                "options": ["Only academic skills", "Social, cognitive, and motor skills", "Only physical skills", "No skills development"],
+                "answer": "Social, cognitive, and motor skills"
+            },
+            {
+                "question": "Which of the following best describes the Reflect-Connect-Apply (RCA) method?",
+                "options": ["A technique to memorize facts", "A structured reflection process", "A method for discipline", "A strategy for note-taking"],
+                "answer": "A structured reflection process"
+            },
+            {
+                "question": "Play-based learning often includes which type of activities?",
+                "options": ["Competitive sports only", "Creative and exploratory activities", "Strict academic drills", "Isolated individual tasks"],
+                "answer": "Creative and exploratory activities"
+            },
+            {
+                "question": "The need to promote play in education is often driven by:",
+                "options": ["A desire to reduce creativity", "Research on holistic child development", "Standardised testing requirements", "Budget constraints"],
+                "answer": "Research on holistic child development"
+            },
+            {
+                "question": "Which competency is enhanced through collaborative play?",
+                "options": ["Individual isolation", "Teamwork and communication", "Competitive dominance", "Memorisation"],
+                "answer": "Teamwork and communication"
+            },
+            {
+                "question": "The term \"playful learning experiences\" typically refers to:",
+                "options": ["Boring activities", "Engaging, hands-on experiences", "Teacher lectures", "Strict examinations"],
+                "answer": "Engaging, hands-on experiences"
+            },
+            {
+                "question": "In the context of play-based learning, what does RCA stand for?",
+                "options": ["Read-Calculate-Apply", "Reflect-Connect-Apply", "Review-Critique-Adapt", "React-Create-Act"],
+                "answer": "Reflect-Connect-Apply"
+            },
+            {
+                "question": "One of the main conclusions of play-based learning research is that:",
+                "options": ["Play has no educational value", "Play supports cognitive and social development", "Play is only suitable for preschoolers", "Play disrupts learning"],
+                "answer": "Play supports cognitive and social development"
+            },
+            {
+                "question": "When selecting types of play in a classroom, teachers should consider:",
+                "options": ["Students' interests and developmental stage", "Only the curriculum guidelines", "Teacher convenience", "Uniform activities for all ages"],
+                "answer": "Students' interests and developmental stage"
+            },
+            {
+                "question": "Which of the following is a type of play that is both creative and social?",
+                "options": ["Constructive play", "Free play", "Competitive play", "Passive play"],
+                "answer": "Constructive play"
+            },
+            {
+                "question": "A characteristic of effective play-based learning experiences is:",
+                "options": ["Lack of structure", "Balance between freedom and guidance", "Complete freedom without any teacher input", "Strict rules at all times"],
+                "answer": "Balance between freedom and guidance"
+            },
+            {
+                "question": "What does modifying play in learning typically involve?",
+                "options": ["Adapting activities to suit various learning needs", "Using the same activity for all", "Reducing teacher involvement", "Eliminating rules"],
+                "answer": "Adapting activities to suit various learning needs"
+            },
+            {
+                "question": "Play-based learning environments are most effective when they are:",
+                "options": ["Rigid and unchanging", "Dynamic and flexible", "Strictly structured", "Minimally interactive"],
+                "answer": "Dynamic and flexible"
+            },
+            {
+                "question": "In play-based learning, a teacher should act as a:",
+                "options": ["Dictator", "Observer and facilitator", "Strict disciplinarian", "Passive bystander"],
+                "answer": "Observer and facilitator"
+            },
+            {
+                "question": "Which of the following is NOT typically a goal of play-based learning?",
+                "options": ["Encouraging creativity", "Developing critical thinking", "Focusing solely on standardized testing", "Enhancing social skills"],
+                "answer": "Focusing solely on standardized testing"
+            },
+            {
+                "question": "Reflecting on play experiences helps students to:",
+                "options": ["Forget the activity", "Link play with academic learning", "Avoid challenging tasks", "Focus only on fun"],
+                "answer": "Link play with academic learning"
+            },
+            {
+                "question": "A significant benefit of incorporating play into learning is:",
+                "options": ["Increased student engagement", "Reduced interaction", "Limited creativity", "Over-structuring of activities"],
+                "answer": "Increased student engagement"
+            },
+            {
+                "question": "What is one challenge teachers might face when implementing play-based learning?",
+                "options": ["Balancing structure and freedom", "Excessive teacher control", "Lack of student interest", "Too much reliance on textbooks"],
+                "answer": "Balancing structure and freedom"
+            },
+            {
+                "question": "In conclusion, play-based learning is designed to:",
+                "options": ["Replace academic learning completely", "Support holistic development through playful engagement", "Focus solely on physical activity", "Limit intellectual growth"],
+                "answer": "Support holistic development through playful engagement"
             }
-        ];
+        ]
 
-        // Global Variables
-        let currentQuestion = 0;
+        let currentQuestionIndex = 0;
         let score = 0;
-        let userAnswers = [];
-        let userName = "";
+        const totalQuestions = questions.length;
 
         // DOM Elements
-        const subscriptionSection = document.getElementById("subscription-section");
-        const nameSection = document.getElementById("name-section");
-        const quizSection = document.getElementById("quiz-section");
-        const resultSection = document.getElementById("result-section");
-        const reviewSection = document.getElementById("review-section");
-
+        const popupOverlay = document.getElementById("popup-overlay");
         const subscribeBtn = document.getElementById("subscribe-btn");
-        const startQuizBtn = document.getElementById("start-quiz-btn");
+        const startBtn = document.getElementById("start-btn");
+        const quizContainer = document.getElementById("quiz-container");
+        const questionNumberEl = document.getElementById("question-number");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options-container");
+        const feedbackDiv = document.getElementById("feedback");
+        const scoreSpan = document.getElementById("score");
+        const totalSpan = document.getElementById("total");
+        const userNameSpan = document.getElementById("user-name");
         const nextBtn = document.getElementById("next-btn");
-        const viewResultsBtn = document.getElementById("view-results-btn");
+        const prevBtn = document.getElementById("prev-btn");
         const restartBtn = document.getElementById("restart-btn");
 
-        const questionNumberElem = document.getElementById("question-number");
-        const questionTextElem = document.getElementById("question-text");
-        const optionsElem = document.getElementById("options");
-        const resultMessageElem = document.getElementById("result-message");
-        const reviewListElem = document.getElementById("review-list");
+        // Utility: Shuffle an array using Fisher–Yates algorithm.
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
-        // Subscription: Open YouTube channel link and then allow the user to proceed
-        subscribeBtn.addEventListener("click", () => {
-            window.open('https://youtube.com/@genielabgh', '_blank');
-            alert("Please subscribe to our YouTube channel and then click OK to proceed.");
-            subscriptionSection.style.display = "none";
-            nameSection.style.display = "block";
+        // Subscribe button: open YouTube channel in new tab.
+        subscribeBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            window.open("https://youtube.com/@genielabgh", "_blank");
         });
 
-        // Start Quiz: Ask for user's name
-        startQuizBtn.addEventListener("click", () => {
-            const nameInput = document.getElementById("username").value.trim();
-            if (nameInput === "") {
-                alert("Please enter your name to start the quiz.");
-                return;
-            }
-            userName = nameInput;
-            nameSection.style.display = "none";
-            quizSection.style.display = "block";
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = [];
+        // Start Quiz button: prompt for user name (if not saved), then start quiz.
+        startBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            popupOverlay.style.display = "none";
+            quizContainer.style.display = "block";
+            totalSpan.textContent = totalQuestions;
             showQuestion();
         });
 
-        // Display current question
-        function showQuestion() {
-            optionsElem.innerHTML = "";
-            const questionData = questions[currentQuestion];
-            questionNumberElem.textContent = "Question " + (currentQuestion + 1) + " of " + questions.length;
-            questionTextElem.textContent = questionData.question;
-            // Create radio button options
-            questionData.options.forEach((option, index) => {
-                const optionLabel = document.createElement("label");
-                optionLabel.classList.add("option-label");
-                const radioInput = document.createElement("input");
-                radioInput.type = "radio";
-                radioInput.name = "option";
-                radioInput.value = index;
-                optionLabel.appendChild(radioInput);
-                optionLabel.appendChild(document.createTextNode(" " + option));
-                optionsElem.appendChild(optionLabel);
-            });
-        }
-
-        // Next button: Record answer and move to next question
-        nextBtn.addEventListener("click", () => {
-            const selectedOption = document.querySelector('input[name="option"]:checked');
-            if (!selectedOption) {
-                alert("Please select an answer.");
-                return;
-            }
-            const answer = parseInt(selectedOption.value);
-            userAnswers.push(answer);
-            if (answer === questions[currentQuestion].correctAnswer) {
-                score++;
-            }
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
+        // Next button: increment question index and show next question.
+        nextBtn.addEventListener("click", function () {
+            if (currentQuestionIndex < totalQuestions - 1) {
+                currentQuestionIndex++;
+                localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
                 showQuestion();
+            }
+        });
+
+        // Previous button: decrement question index and show previous question.
+        prevBtn.addEventListener("click", function () {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
+                showQuestion();
+            }
+        });
+
+        // Restart button: clear progress and reload the page.
+        restartBtn.addEventListener("click", function () {
+            localStorage.clear();
+            location.reload();
+        });
+        // Show the current question and options.
+        function showQuestion() {
+            feedbackDiv.textContent = "";
+            // Always show the Next button.
+            nextBtn.style.display = "block";
+            // Hide the Previous button on the first question.
+            if (currentQuestionIndex === 0) {
+                prevBtn.style.display = "none";
+            } else {
+                prevBtn.style.display = "block";
+            }
+
+            if (currentQuestionIndex < totalQuestions) {
+                questionNumberEl.textContent = "Question: " + (currentQuestionIndex + 1);
+                const currentQuestion = questions[currentQuestionIndex];
+                questionText.textContent = currentQuestion.question;
+                optionsContainer.innerHTML = "";
+                // Shuffle options on every page refresh / question display.
+                const shuffledOptions = shuffleArray(currentQuestion.options.slice());
+                const savedAnswer = localStorage.getItem("answered_" + currentQuestionIndex);
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.classList.add("option-btn");
+                    if (savedAnswer !== null) {
+                        // If already answered, disable the button and mark coloring.
+                        button.disabled = true;
+                        if (option === currentQuestion.answer) {
+                            button.style.backgroundColor = "green";
+                        }
+                        if (option === savedAnswer && savedAnswer !== currentQuestion.answer) {
+                            button.style.backgroundColor = "red";
+                        }
+                    } else {
+                        button.addEventListener("click", function (e) {
+                            checkAnswer(option, e.target);
+                        });
+                    }
+                    optionsContainer.appendChild(button);
+                });
+                if (savedAnswer !== null) {
+                    if (savedAnswer === currentQuestion.answer) {
+                        feedbackDiv.innerHTML = "<p class='correct'>Correct!</p>";
+                    } else {
+                        feedbackDiv.innerHTML = "<p class='wrong'>Wrong!</p>";
+                    }
+                }
             } else {
                 showResult();
             }
-        });
+        }
 
-        // Display Result with congratulatory message and confetti
+
+
+        // Check the selected answer, update the score, and provide feedback.
+        function checkAnswer(selected, selectedButton) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const buttons = document.querySelectorAll(".option-btn");
+            buttons.forEach(btn => btn.disabled = true);
+            if (selected !== currentQuestion.answer) {
+                selectedButton.style.backgroundColor = "red";
+                feedbackDiv.innerHTML = "<p class='wrong'>Wrong!</p>";
+            } else {
+                feedbackDiv.innerHTML = "<p class='correct'>Correct!</p>";
+                score++;
+            }
+            buttons.forEach(btn => {
+                if (btn.textContent === currentQuestion.answer) {
+                    btn.style.backgroundColor = "green";
+                }
+            });
+            scoreSpan.textContent = score;
+            localStorage.setItem("score", score);
+            localStorage.setItem("answered_" + currentQuestionIndex, selected);
+            nextBtn.style.display = "block";
+        }
+
+        // Show final result after all questions are answered.
         function showResult() {
-            quizSection.style.display = "none";
-            resultSection.style.display = "block";
-            resultMessageElem.textContent = "Congratulations " + userName + "! You scored " + score + " out of " + questions.length + ".";
-            // Trigger confetti animation
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
+            optionsContainer.innerHTML = "";
+            questionNumberEl.textContent = "";
+            questionText.textContent = "Quiz Completed!";
+            // Display final score and percentage.
+            feedbackDiv.innerHTML = `<p><strong>Your final score is:</strong> ${score} out of ${totalQuestions}</p>`;
+            let percentage = (score / totalQuestions) * 100;
+            if (percentage >= 50) {
+                feedbackDiv.innerHTML += "<p style='color: green; font-size: 24px;'>&#10004; Passed</p>";
+            } else {
+                feedbackDiv.innerHTML += "<p style='color: red; font-size: 24px;'>&#10006; Failed</p>";
+            }
+            nextBtn.style.display = "none";
+            document.getElementById("score-container").style.display = "none";
         }
 
-        // View Answers: Show review of correct and incorrect answers
-        viewResultsBtn.addEventListener("click", () => {
-            resultSection.style.display = "none";
-            reviewSection.style.display = "block";
-            displayReview();
+        // On page load, resume progress if available.
+        document.addEventListener("DOMContentLoaded", function () {
+            const savedIndex = localStorage.getItem("currentQuestionIndex");
+            const savedScore = localStorage.getItem("score");
+            const savedName = localStorage.getItem("userName");
+            if (savedIndex !== null) {
+                currentQuestionIndex = parseInt(savedIndex, 10);
+                score = savedScore ? parseInt(savedScore, 10) : 0;
+                scoreSpan.textContent = score;
+                if (savedName) {
+                    userNameSpan.textContent = savedName;
+                }
+                popupOverlay.style.display = "none";
+                quizContainer.style.display = "block";
+                totalSpan.textContent = totalQuestions;
+                showQuestion();
+            }
         });
-
-        // Restart Quiz: Allow user to restart the quiz
-        restartBtn.addEventListener("click", () => {
-            reviewSection.style.display = "none";
-            currentQuestion = 0;
-            score = 0;
-            userAnswers = [];
-            quizSection.style.display = "block";
-            showQuestion();
-        });
-
-        // Display review list of questions and answers
-        function displayReview() {
-            reviewListElem.innerHTML = "";
-            questions.forEach((q, index) => {
-                const userAnswer = userAnswers[index];
-                const isCorrect = userAnswer === q.correctAnswer;
-                const questionReview = document.createElement("div");
-                questionReview.classList.add("question-review");
-                questionReview.innerHTML =
-                    "<strong>Q" + (index + 1) + ":</strong> " + q.question + "<br>" +
-                    "<strong>Your answer:</strong> " + q.options[userAnswer] + " " +
-                    (isCorrect ? "&#10004;" : "&#10008;") + "<br>" +
-                    "<strong>Correct answer:</strong> " + q.options[q.correctAnswer] + "<br><br>";
-                reviewListElem.appendChild(questionReview);
-            });
-        }
     </script>
 </body>
 
