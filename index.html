@@ -206,8 +206,1409 @@
     <script>
         // Sample quiz data extracted from the PDF.
         // (You can use an external JSON file and fetch it if needed.)
-        const questions = [
+        let questions = [
+
             {
+<<<<<<< HEAD
+                "question": "How does the NTS define a teacher's understanding of the learner?",
+                "options": [
+                    "Judging learners by test scores",
+                    "Recognizing learners' diverse backgrounds, experiences, and needs",
+                    "Focusing only on group performance",
+                    "Maintaining discipline"
+                ],
+                "answer": "Recognizing learners' diverse backgrounds, experiences, and needs"
+            },
+            {
+                "question": "Teachers are expected to contribute to a safe and secure learning environment by:",
+                "options": [
+                    "Locking the classroom",
+                    "Controlling learner behavior strictly",
+                    "Promoting respect, protection, and inclusion",
+                    "Avoiding difficult topics"
+                ],
+                "answer": "Promoting respect, protection, and inclusion"
+            },
+            {
+                "question": "What does the 'Reflect' stage of RCA involve?",
+                "options": [
+                    "Thinking about the experience or activity",
+                    "Guessing answers",
+                    "Discussing only",
+                    "Memorizing content"
+                ],
+                "answer": "Thinking about the experience or activity"
+            },
+            {
+                "question": "Which technique is most likely used in the lecture method?",
+                "options": [
+                    "Storytelling",
+                    "Debates",
+                    "Peer teaching",
+                    "Role-playing"
+                ],
+                "answer": "Storytelling"
+            },
+            {
+                "question": "Active learning helps students to:",
+                "options": [
+                    "Remain passive",
+                    "Memorize without understanding",
+                    "Apply what they learn in real life",
+                    "Depend on the teacher only"
+                ],
+                "answer": "Apply what they learn in real life"
+            },
+            {
+                "question": "The cognitive domain in Bloom\u2019s Taxonomy focuses on:",
+                "options": [
+                    "Attitudes and values",
+                    "Physical development",
+                    "Knowledge and intellectual skills",
+                    "Social interaction"
+                ],
+                "answer": "Knowledge and intellectual skills"
+            },
+            {
+                "question": "A project that integrates science and art would be an example of:",
+                "options": [
+                    "Direct instruction",
+                    "Subject-based teaching",
+                    "Integrated pedagogy",
+                    "Memorization strategy"
+                ],
+                "answer": "Integrated pedagogy"
+            },
+            {
+                "question": "Which of these is a common teacher-centred method?",
+                "options": [
+                    "Lecture method",
+                    "Project work",
+                    "Group discussion",
+                    "Role-playing"
+                ],
+                "answer": "Lecture method"
+            },
+            {
+                "question": "Project-based learning integrates:",
+                "options": [
+                    "Knowledge from various subjects over time",
+                    "Short multiple-choice quizzes",
+                    "Strictly one subject",
+                    "Lectures only"
+                ],
+                "answer": "Knowledge from various subjects over time"
+            },
+            {
+                "question": "Why is teaching considered a profession?",
+                "options": [
+                    "It is a lifelong hobby",
+                    "It requires no formal training",
+                    "It adheres to ethical standards and continuous learning",
+                    "Anyone can do it"
+                ],
+                "answer": "It adheres to ethical standards and continuous learning"
+            },
+            {
+                "question": "What is a major characteristic of learner-centred teaching?",
+                "options": [
+                    "Passive reception of knowledge",
+                    "Collaboration and critical thinking",
+                    "Uniform instruction for all",
+                    "Lecture-heavy delivery"
+                ],
+                "answer": "Collaboration and critical thinking"
+            },
+            {
+                "question": "One key advantage of lesson planning is:",
+                "options": [
+                    "Avoiding assessment",
+                    "Improvising activities",
+                    "Providing a roadmap for teaching",
+                    "Making lessons unpredictable"
+                ],
+                "answer": "Providing a roadmap for teaching"
+            },
+            {
+                "question": "A key reason to promote play in learning is to:",
+                "options": [
+                    "Keep children busy",
+                    "Encourage engagement and motivation",
+                    "Reduce classroom materials",
+                    "Shorten lessons"
+                ],
+                "answer": "Encourage engagement and motivation"
+            },
+            {
+                "question": "Post-independence reforms in Ghana emphasized:",
+                "options": [
+                    "Cutting educational funding",
+                    "Promoting elite schools only",
+                    "Expanding education and reflecting national identity",
+                    "Reducing teacher training"
+                ],
+                "answer": "Expanding education and reflecting national identity"
+            },
+            {
+                "question": "What is the primary role of techniques in teaching?",
+                "options": [
+                    "To manage school budgets",
+                    "To serve as specific tools or activities within a method",
+                    "To replace teaching strategies",
+                    "To reduce teacher workload"
+                ],
+                "answer": "To serve as specific tools or activities within a method"
+            },
+            {
+                "question": "In the NTS, effective communication means:",
+                "options": [
+                    "Commanding silence",
+                    "Issuing instructions clearly",
+                    "Listening actively and communicating respectfully",
+                    "Giving assignments regularly"
+                ],
+                "answer": "Listening actively and communicating respectfully"
+            },
+            {
+                "question": "What is NOT a principle of effective teaching?",
+                "options": [
+                    "Clear objectives",
+                    "Passive learning",
+                    "Active learner engagement",
+                    "Continuous assessment"
+                ],
+                "answer": "Passive learning"
+            },
+            {
+                "question": "Collaborative learning encourages students to:",
+                "options": [
+                    "Work in silence",
+                    "Compete aggressively",
+                    "Share responsibility and solve problems together",
+                    "Ignore each other\u2019s ideas"
+                ],
+                "answer": "Share responsibility and solve problems together"
+            },
+            {
+                "question": "The affective domain in Bloom\u2019s Taxonomy deals with:",
+                "options": [
+                    "Motor coordination",
+                    "Cognitive skills",
+                    "Attitudes and feelings",
+                    "Group performance"
+                ],
+                "answer": "Attitudes and feelings"
+            },
+            {
+                "question": "Which method encourages learners to reflect on experiences?",
+                "options": [
+                    "Silent reading",
+                    "Experiential learning",
+                    "Flashcards",
+                    "Test drills"
+                ],
+                "answer": "Experiential learning"
+            },
+            {
+                "question": "What is the goal of integrated pedagogies?",
+                "options": [
+                    "To use one fixed teaching method",
+                    "To merge various methods for holistic learning",
+                    "To eliminate learner-centered methods",
+                    "To make lessons shorter"
+                ],
+                "answer": "To merge various methods for holistic learning"
+            },
+            {
+                "question": "Which of the following types of play promotes physical development?",
+                "options": [
+                    "Sensory play",
+                    "Constructive play",
+                    "Physical play",
+                    "Pretend play"
+                ],
+                "answer": "Physical play"
+            },
+            {
+                "question": "What is a teacher-centred method of teaching?",
+                "options": [
+                    "Students discover knowledge independently",
+                    "Teacher serves as the primary source of information",
+                    "Peer-to-peer instruction",
+                    "Student-led project learning"
+                ],
+                "answer": "Teacher serves as the primary source of information"
+            },
+            {
+                "question": "The demonstration method involves:",
+                "options": [
+                    "Learners working on group tasks",
+                    "Teachers showing processes or concepts",
+                    "Peer marking",
+                    "Silent reading sessions"
+                ],
+                "answer": "Teachers showing processes or concepts"
+            },
+            {
+                "question": "The psychomotor domain can best be assessed through:",
+                "options": [
+                    "Essays",
+                    "Multiple-choice questions",
+                    "Performance tasks",
+                    "True/false quizzes"
+                ],
+                "answer": "Performance tasks"
+            },
+            {
+                "question": "Governor Guggisberg's education reforms aimed to:",
+                "options": [
+                    "Privatize all schools",
+                    "Formalize teacher training and curriculum",
+                    "Eliminate teacher qualifications",
+                    "Focus only on religious education"
+                ],
+                "answer": "Formalize teacher training and curriculum"
+            },
+            {
+                "question": "What is the purpose of the National Teachers\u2019 Standards (NTS) in Ghana?",
+                "options": [
+                    "To assess student performance in national exams",
+                    "To provide a benchmark for professional teaching standards and guide teacher development",
+                    "To monitor school management practices",
+                    "To enforce teacher attendance"
+                ],
+                "answer": "To provide a benchmark for professional teaching standards and guide teacher development"
+            },
+            {
+                "question": "What is one of the outcomes of using case studies in teaching?",
+                "options": [
+                    "Improved memorization",
+                    "Understanding through real-life scenarios",
+                    "Faster grading",
+                    "Reduced class interaction"
+                ],
+                "answer": "Understanding through real-life scenarios"
+            },
+            {
+                "question": "Modern teacher education reforms promote:",
+                "options": [
+                    "Rote memorization",
+                    "Outcome-based and competency-based approaches",
+                    "Fixed lesson plans",
+                    "Sole reliance on textbooks"
+                ],
+                "answer": "Outcome-based and competency-based approaches"
+            },
+            {
+                "question": "Why is lesson planning essential?",
+                "options": [
+                    "To ensure random delivery",
+                    "To reduce teacher workload",
+                    "To structure engaging and outcome-oriented lessons",
+                    "To eliminate student interaction"
+                ],
+                "answer": "To structure engaging and outcome-oriented lessons"
+            },
+            {
+                "question": "What was one focus of the 2000s reforms in teacher education?",
+                "options": [
+                    "Reducing teacher accountability",
+                    "Discouraging ICT use",
+                    "Improving teacher qualifications",
+                    "Eliminating training colleges"
+                ],
+                "answer": "Improving teacher qualifications"
+            },
+            {
+                "question": "Which taxonomy categorizes educational objectives?",
+                "options": [
+                    "Otterlei\u2019s Taxonomy",
+                    "Maslow\u2019s Hierarchy",
+                    "Bloom\u2019s Taxonomy",
+                    "Vygotsky\u2019s Theory"
+                ],
+                "answer": "Bloom\u2019s Taxonomy"
+            },
+            {
+                "question": "Which of the following is a learner-centred technique?",
+                "options": [
+                    "Lecture",
+                    "Drill",
+                    "Role-playing",
+                    "Recitation"
+                ],
+                "answer": "Role-playing"
+            },
+            {
+                "question": "How does Bloom\u2019s taxonomy support teaching?",
+                "options": [
+                    "By ranking schools",
+                    "By organizing learning goals into domains",
+                    "By offering grading rubrics",
+                    "By suggesting homework tasks"
+                ],
+                "answer": "By organizing learning goals into domains"
+            },
+            {
+                "question": "Which of these best describes teaching strategies?",
+                "options": [
+                    "Specific classroom rules",
+                    "Plans of action to achieve learning outcomes",
+                    "Individual learner preferences",
+                    "Group seating arrangements"
+                ],
+                "answer": "Plans of action to achieve learning outcomes"
+            },
+            {
+                "question": "Otterlei\u2019s taxonomy focuses on:",
+                "options": [
+                    "Student grades",
+                    "Structured growth and reflective practice",
+                    "Exam scoring",
+                    "Textbook usage"
+                ],
+                "answer": "Structured growth and reflective practice"
+            },
+            {
+                "question": "Which strategy encourages learners to discover principles themselves?",
+                "options": [
+                    "Guided discovery learning",
+                    "Lecture method",
+                    "Recitation",
+                    "Memorization"
+                ],
+                "answer": "Guided discovery learning"
+            },
+            {
+                "question": "What is one of the benefits of the 'Apply' stage in RCA?",
+                "options": [
+                    "Quick completion of tasks",
+                    "Improved test performance",
+                    "Using learning in real-life or future situations",
+                    "Repeating the play"
+                ],
+                "answer": "Using learning in real-life or future situations"
+            },
+            {
+                "question": "Teaching as a vocation in early Ghana was primarily driven by:",
+                "options": [
+                    "Financial gain",
+                    "Job security",
+                    "A divine calling and passion",
+                    "Government pressure"
+                ],
+                "answer": "A divine calling and passion"
+            },
+            {
+                "question": "A disadvantage of learner-centred teaching is that it:",
+                "options": [
+                    "Promotes deep learning",
+                    "Requires fewer resources",
+                    "Is time-consuming and resource-heavy",
+                    "Discourages student participation"
+                ],
+                "answer": "Is time-consuming and resource-heavy"
+            },
+            {
+                "question": "Which of the following is NOT a core competency developed through play?",
+                "options": [
+                    "Creativity and innovation",
+                    "Self-management",
+                    "Memorization drills",
+                    "Social and emotional development"
+                ],
+                "answer": "Memorization drills"
+            },
+            {
+                "question": "What is a requirement for successful learner-centred teaching?",
+                "options": [
+                    "Rigid curriculum",
+                    "Highly trained and adaptable teachers",
+                    "No preparation",
+                    "Single teaching method"
+                ],
+                "answer": "Highly trained and adaptable teachers"
+            },
+            {
+                "question": "An advantage of the teacher-centred method is:",
+                "options": [
+                    "Increased learner autonomy",
+                    "Effective for large groups",
+                    "Promotes creativity",
+                    "Encourages independent research"
+                ],
+                "answer": "Effective for large groups"
+            },
+            {
+                "question": "One recent change in teacher education is:",
+                "options": [
+                    "Shorter training duration",
+                    "Increased use of inclusive education practices",
+                    "Greater emphasis on punishments",
+                    "Elimination of practicum"
+                ],
+                "answer": "Increased use of inclusive education practices"
+            },
+            {
+                "question": "Stating clear lesson purposes helps to:",
+                "options": [
+                    "Confuse learners",
+                    "Make planning optional",
+                    "Guide instruction and assessment",
+                    "Avoid setting expectations"
+                ],
+                "answer": "Guide instruction and assessment"
+            },
+            {
+                "question": "What does an effective teaching strategy aim to do?",
+                "options": [
+                    "Ignore student needs",
+                    "Rely solely on textbooks",
+                    "Promote creativity and critical thinking",
+                    "Discourage feedback"
+                ],
+                "answer": "Promote creativity and critical thinking"
+            },
+            {
+                "question": "Effective teaching requires mastery of:",
+                "options": [
+                    "Only subject content",
+                    "Only classroom rules",
+                    "Both content and pedagogy",
+                    "Technology only"
+                ],
+                "answer": "Both content and pedagogy"
+            },
+            {
+                "question": "What does LtP emphasize most?",
+                "options": [
+                    "Assessment-driven teaching",
+                    "Child-centred exploration and creativity",
+                    "Time limits",
+                    "Teacher command"
+                ],
+                "answer": "Child-centred exploration and creativity"
+            },
+            {
+                "question": "What type of play involves imagination and role enactment?",
+                "options": [
+                    "Constructive play",
+                    "Dramatic or pretend play",
+                    "Sensory play",
+                    "Physical play"
+                ],
+                "answer": "Dramatic or pretend play"
+            },
+            {
+                "question": "Which of the following is a characteristic of play-based learning?",
+                "options": [
+                    "Compulsory outcomes",
+                    "Strict teacher control",
+                    "Voluntary and enjoyable engagement",
+                    "Silent individual work"
+                ],
+                "answer": "Voluntary and enjoyable engagement"
+            },
+            {
+                "question": "A disadvantage of the teacher-centred approach is:",
+                "options": [
+                    "It supports exploration",
+                    "It limits learner participation",
+                    "It fosters group collaboration",
+                    "It emphasizes critical thinking"
+                ],
+                "answer": "It limits learner participation"
+            },
+            {
+                "question": "According to the NTS, professionalism includes:",
+                "options": [
+                    "Following head teacher instructions strictly",
+                    "Being on time and keeping records",
+                    "Demonstrating knowledge, values, and ethical behavior",
+                    "Having advanced degrees"
+                ],
+                "answer": "Demonstrating knowledge, values, and ethical behavior"
+            },
+            {
+                "question": "Which of these is a component of a lesson plan?",
+                "options": [
+                    "Learner background check",
+                    "Assessment methods",
+                    "Playtime log",
+                    "Personal teacher goals"
+                ],
+                "answer": "Assessment methods"
+            },
+            {
+                "question": "What does the NTS say about collaboration with stakeholders?",
+                "options": [
+                    "It is optional for senior teachers",
+                    "It should be minimized",
+                    "Teachers should work with colleagues, parents, and the community",
+                    "Only head teachers should collaborate"
+                ],
+                "answer": "Teachers should work with colleagues, parents, and the community"
+            },
+            {
+                "question": "Which of the following best summarizes Ghana\u2019s evolving education system?",
+                "options": [
+                    "Static and unchanging",
+                    "Focused on elite schools only",
+                    "Reactive to globalization and technological change",
+                    "Detaching from societal needs"
+                ],
+                "answer": "Reactive to globalization and technological change"
+            },
+            {
+                "question": "Which of the following is a core feature of active learning?",
+                "options": [
+                    "Listening quietly",
+                    "Solving problems and applying knowledge",
+                    "Reading aloud only",
+                    "Copying from the board"
+                ],
+                "answer": "Solving problems and applying knowledge"
+            },
+            {
+                "question": "Which of the following is most aligned with direct instruction?",
+                "options": [
+                    "Project work",
+                    "Story-based learning",
+                    "Step-by-step teaching",
+                    "Trial-and-error learning"
+                ],
+                "answer": "Step-by-step teaching"
+            },
+            {
+                "question": "Learner-centred techniques are most effective when students:",
+                "options": [
+                    "Are passive listeners",
+                    "Work in isolation",
+                    "Engage in group work and reflection",
+                    "Only follow instructions"
+                ],
+                "answer": "Engage in group work and reflection"
+            },
+            {
+                "question": "According to the NTS, a key indicator of professionalism is:",
+                "options": [
+                    "Following rules blindly",
+                    "Attendance and punctuality",
+                    "Respecting diverse perspectives and ethical conduct",
+                    "Marking papers efficiently"
+                ],
+                "answer": "Respecting diverse perspectives and ethical conduct"
+            },
+            {
+                "question": "The future of teaching in Ghana includes:",
+                "options": [
+                    "Eliminating lifelong learning",
+                    "Reducing use of digital tools",
+                    "Integration of AI and emphasis on global citizenship",
+                    "Shifting all lessons to lecture-only formats"
+                ],
+                "answer": "Integration of AI and emphasis on global citizenship"
+            },
+            {
+                "question": "In Ghana's early history, many teachers were also:",
+                "options": [
+                    "Doctors",
+                    "Preachers",
+                    "Politicians",
+                    "Merchants"
+                ],
+                "answer": "Preachers"
+            },
+            {
+                "question": "Professional Practice requires teachers to:",
+                "options": [
+                    "Follow instructions from the head teacher",
+                    "Deliver content exactly as in the textbook",
+                    "Plan and deliver lessons that engage all learners",
+                    "Assign frequent homework"
+                ],
+                "answer": "Plan and deliver lessons that engage all learners"
+            },
+            {
+                "question": "Learning through play (LtP) is primarily:",
+                "options": [
+                    "Teacher-led lecture sessions",
+                    "Guided or free play that supports exploration and expression",
+                    "Competitive gaming",
+                    "Occasional relaxation breaks"
+                ],
+                "answer": "Guided or free play that supports exploration and expression"
+            },
+            {
+                "question": "Which approach best helps learners to develop teamwork skills?",
+                "options": [
+                    "Lecturing",
+                    "Direct instruction",
+                    "Collaborative learning",
+                    "Dictation"
+                ],
+                "answer": "Collaborative learning"
+            },
+            {
+                "question": "Problem-based learning typically starts with:",
+                "options": [
+                    "Lectures",
+                    "Detailed instructions",
+                    "Real-world problems and minimal initial information",
+                    "Pre-written notes"
+                ],
+                "answer": "Real-world problems and minimal initial information"
+            },
+            {
+                "question": "What should a teacher provide in a learner-centred environment?",
+                "options": [
+                    "All answers to problems",
+                    "Minimal student input",
+                    "Opportunities for exploration and problem-solving",
+                    "Closed questions only"
+                ],
+                "answer": "Opportunities for exploration and problem-solving"
+            },
+            {
+                "question": "Technical teaching skills include:",
+                "options": [
+                    "Content memorization",
+                    "Planning and sequencing activities",
+                    "Improvisation without goals",
+                    "Only writing notes"
+                ],
+                "answer": "Planning and sequencing activities"
+            },
+            {
+                "question": "Which of the following is an example of a teaching technique?",
+                "options": [
+                    "Group projects",
+                    "Demonstration",
+                    "Using visual aids",
+                    "Exploration"
+                ],
+                "answer": "Using visual aids"
+            },
+            {
+                "question": "Integrated pedagogies help meet:",
+                "options": [
+                    "Uniform learner needs",
+                    "Exam-focused strategies",
+                    "Diverse learner needs",
+                    "Teacher convenience"
+                ],
+                "answer": "Diverse learner needs"
+            },
+            {
+                "question": "A flexible lesson plan allows for:",
+                "options": [
+                    "Ignoring objectives",
+                    "Rigid instruction",
+                    "Adaptation to learner responses",
+                    "Skipping assessment"
+                ],
+                "answer": "Adaptation to learner responses"
+            },
+            {
+                "question": "Which philosophy emphasizes learning through experience?",
+                "options": [
+                    "Perennialism",
+                    "Progressivism",
+                    "Constructivism",
+                    "Essentialism"
+                ],
+                "answer": "Progressivism"
+            },
+            {
+                "question": "How does play bridge the gap between theory and real-world experience?",
+                "options": [
+                    "By memorizing facts",
+                    "Through guided and applied learning",
+                    "By simplifying content",
+                    "Through repetitive exercises"
+                ],
+                "answer": "Through guided and applied learning"
+            },
+            {
+                "question": "Which of the following is a myth about teaching?",
+                "options": [
+                    "Teaching requires specialized skills",
+                    "Teaching is only about talking",
+                    "Teachers shape future generations",
+                    "Teaching promotes critical thinking"
+                ],
+                "answer": "Teaching is only about talking"
+            },
+            {
+                "question": "Which of the following is best for skill-based theoretical subjects?",
+                "options": [
+                    "Lecture and demonstration methods",
+                    "Field trips",
+                    "Peer teaching",
+                    "Brainstorming"
+                ],
+                "answer": "Lecture and demonstration methods"
+            },
+            {
+                "question": "Group discussion encourages:",
+                "options": [
+                    "Teacher domination",
+                    "Silent study",
+                    "Student collaboration and exchange of ideas",
+                    "Independent memorization"
+                ],
+                "answer": "Student collaboration and exchange of ideas"
+            },
+            {
+                "question": "The NTS states that teachers must contribute to:",
+                "options": [
+                    "Classroom cleaning",
+                    "Learner discipline only",
+                    "School development and learner well-being",
+                    "Parent\u2013teacher committees"
+                ],
+                "answer": "School development and learner well-being"
+            },
+            {
+                "question": "An example of project-based learning would be:",
+                "options": [
+                    "Reading a chapter and answering questions",
+                    "Working on a science experiment over two weeks",
+                    "Drilling math problems daily",
+                    "Copying notes from the board"
+                ],
+                "answer": "Working on a science experiment over two weeks"
+            },
+            {
+                "question": "Play-based learning is especially effective for:",
+                "options": [
+                    "Teenagers",
+                    "Early childhood education",
+                    "Adult learners",
+                    "University students"
+                ],
+                "answer": "Early childhood education"
+            },
+            {
+                "question": "In learner-centred teaching, the learning process is usually:",
+                "options": [
+                    "Linear and predictable",
+                    "Exploratory and dynamic",
+                    "Dictated by the teacher\u2019s mood",
+                    "Entirely unstructured"
+                ],
+                "answer": "Exploratory and dynamic"
+            },
+            {
+                "question": "What helps teachers evaluate if lesson objectives are met?",
+                "options": [
+                    "Assessment methods",
+                    "Student complaints",
+                    "Peer discussions",
+                    "Lesson duration"
+                ],
+                "answer": "Assessment methods"
+            },
+            {
+                "question": "What is the main goal of the RCA technique?",
+                "options": [
+                    "To shorten lessons",
+                    "To entertain learners",
+                    "To enhance experiential learning through reflection, connection, and application",
+                    "To replace traditional teaching"
+                ],
+                "answer": "To enhance experiential learning through reflection, connection, and application"
+            },
+            {
+                "question": "What does Professional Values and Attitudes promote?",
+                "options": [
+                    "Efficient timekeeping",
+                    "Effective grading",
+                    "Respect, care, integrity, and commitment to learners\u2019 well-being",
+                    "Subject matter expertise"
+                ],
+                "answer": "Respect, care, integrity, and commitment to learners\u2019 well-being"
+            },
+            {
+                "question": "Teachers are expected to uphold which of the following values?",
+                "options": [
+                    "Independence and silence",
+                    "Authority and discipline",
+                    "Integrity, dignity, and fairness",
+                    "Privacy and confidentiality"
+                ],
+                "answer": "Integrity, dignity, and fairness"
+            },
+            {
+                "question": "What is one of the primary roles of a teacher?",
+                "options": [
+                    "Spectator of learning",
+                    "Critic of student behavior",
+                    "Facilitator of knowledge and skills",
+                    "Administrator of school policies"
+                ],
+                "answer": "Facilitator of knowledge and skills"
+            },
+            {
+                "question": "Which of the following is most essential during planning?",
+                "options": [
+                    "Setting unclear goals",
+                    "Focusing on materials only",
+                    "Aligning strategies with learner needs",
+                    "Using the same lesson plan every year"
+                ],
+                "answer": "Aligning strategies with learner needs"
+            },
+            {
+                "question": "What is one benefit of using project work in a learner-centred class?",
+                "options": [
+                    "Focus on competition",
+                    "Short-term learning",
+                    "Integration of multiple subjects and skills",
+                    "Minimal student involvement"
+                ],
+                "answer": "Integration of multiple subjects and skills"
+            },
+            {
+                "question": "Which of these is least likely in a learner-centred classroom?",
+                "options": [
+                    "Student autonomy",
+                    "Teacher lecturing continuously",
+                    "Collaborative work",
+                    "Open-ended tasks"
+                ],
+                "answer": "Teacher lecturing continuously"
+            },
+            {
+                "question": "Games with rules are a type of play that focuses on:",
+                "options": [
+                    "Total freedom",
+                    "Rule-following and structure",
+                    "Silent activity",
+                    "Solitary exploration"
+                ],
+                "answer": "Rule-following and structure"
+            },
+            {
+                "question": "Which of the following is a key benefit of play-based learning?",
+                "options": [
+                    "Increased competitiveness",
+                    "Enhanced holistic development",
+                    "Focus on memorization",
+                    "Longer nap times"
+                ],
+                "answer": "Enhanced holistic development"
+            },
+            {
+                "question": "Which technique encourages students to take on teaching roles?",
+                "options": [
+                    "Peer teaching",
+                    "Demonstration",
+                    "Direct instruction",
+                    "Silent reading"
+                ],
+                "answer": "Peer teaching"
+            },
+            {
+                "question": "In learner-centred teaching, tasks are often:",
+                "options": [
+                    "Uniform for all students",
+                    "Highly structured and controlled",
+                    "Flexible and personalized",
+                    "Dictated by the teacher only"
+                ],
+                "answer": "Flexible and personalized"
+            },
+            {
+                "question": "Which learner-centred method promotes long-term engagement?",
+                "options": [
+                    "Project work",
+                    "Lecturing",
+                    "Reading assignments",
+                    "Recitation"
+                ],
+                "answer": "Project work"
+            },
+            {
+                "question": "Which best describes the role of the teacher in a learner-centred approach?",
+                "options": [
+                    "Main lecturer",
+                    "Facilitator and guide",
+                    "Examiner",
+                    "Supervisor"
+                ],
+                "answer": "Facilitator and guide"
+            },
+            {
+                "question": "Which of the following is a quality of an effective teacher?",
+                "options": [
+                    "Strictness",
+                    "Strong subject knowledge",
+                    "Lack of empathy",
+                    "Inflexibility"
+                ],
+                "answer": "Strong subject knowledge"
+            },
+            {
+                "question": "Teacher-centred methods are most suitable when:",
+                "options": [
+                    "Learners are expected to construct knowledge",
+                    "Lessons are focused on problem-solving",
+                    "Large groups need foundational theory",
+                    "Projects need extended time"
+                ],
+                "answer": "Large groups need foundational theory"
+            },
+            {
+                "question": "The role of the teacher in a teacher-centred classroom is to:",
+                "options": [
+                    "Observe only",
+                    "Guide and facilitate only",
+                    "Be the main knowledge provider",
+                    "Let students work independently"
+                ],
+                "answer": "Be the main knowledge provider"
+            },
+            {
+                "question": "Why can learner-centred teaching lead to unequal participation?",
+                "options": [
+                    "Because students lack ideas",
+                    "Because some students dominate activities",
+                    "Because it\u2019s not interactive",
+                    "Because students don\u2019t like it"
+                ],
+                "answer": "Because some students dominate activities"
+            },
+            {
+                "question": "What does the NTS encourage regarding lifelong learning?",
+                "options": [
+                    "It is only for students",
+                    "Teachers should engage in continuous professional development",
+                    "Learning should end after qualification",
+                    "Only ICT teachers need it"
+                ],
+                "answer": "Teachers should engage in continuous professional development"
+            },
+            {
+                "question": "What technique involves repetition to reinforce learning?",
+                "options": [
+                    "Role-play",
+                    "Drill",
+                    "Debate",
+                    "Inquiry"
+                ],
+                "answer": "Drill"
+            },
+            {
+                "question": "What kind of play involves activities like building or drawing?",
+                "options": [
+                    "Dramatic play",
+                    "Constructive play",
+                    "Sensory play",
+                    "Rule-based play"
+                ],
+                "answer": "Constructive play"
+            },
+            {
+                "question": "Which philosophy asserts that learners actively construct knowledge?",
+                "options": [
+                    "Perennialism",
+                    "Progressivism",
+                    "Constructivism",
+                    "Behaviorism"
+                ],
+                "answer": "Constructivism"
+            },
+            {
+                "question": "How should teachers demonstrate commitment to learners, according to the NTS?",
+                "options": [
+                    "Maintaining a quiet classroom",
+                    "Avoiding personal contact with students",
+                    "Showing care, respect, and a belief in learners\u2019 potential",
+                    "Grading fairly"
+                ],
+                "answer": "Showing care, respect, and a belief in learners\u2019 potential"
+            },
+            {
+                "question": "One way to improve teaching practice is through:",
+                "options": [
+                    "Ignoring feedback",
+                    "Using outdated plans",
+                    "Reflecting on lesson delivery",
+                    "Repeating the same lesson each year"
+                ],
+                "answer": "Reflecting on lesson delivery"
+            },
+            {
+                "question": "Which domain of the NTS focuses on pedagogy and instructional delivery?",
+                "options": [
+                    "Professional Ethics",
+                    "Professional Practice",
+                    "Curriculum Implementation",
+                    "Instructional Policy"
+                ],
+                "answer": "Professional Practice"
+            },
+            {
+                "question": "Experiential learning is best described as:",
+                "options": [
+                    "Learning through doing and reflecting",
+                    "Memorizing facts",
+                    "Copying notes",
+                    "Teacher-led instruction"
+                ],
+                "answer": "Learning through doing and reflecting"
+            },
+            {
+                "question": "Enquiry-based learning leads to:",
+                "options": [
+                    "Surface-level learning",
+                    "Student disengagement",
+                    "Active knowledge construction",
+                    "Fixed outcomes"
+                ],
+                "answer": "Active knowledge construction"
+            },
+            {
+                "question": "A good learning plan includes all of the following EXCEPT:",
+                "options": [
+                    "Learning objectives",
+                    "Materials and resources",
+                    "Timing and sequencing",
+                    "Student grades"
+                ],
+                "answer": "Student grades"
+            },
+            {
+                "question": "Why is reflection important in professional teaching practice?",
+                "options": [
+                    "To complete administrative reports",
+                    "To improve future teaching and learning outcomes",
+                    "To discipline students",
+                    "To meet weekly targets"
+                ],
+                "answer": "To improve future teaching and learning outcomes"
+            },
+            {
+                "question": "According to the NTS, inclusive education involves:",
+                "options": [
+                    "Grouping learners by ability",
+                    "Focusing on high-achieving students",
+                    "Providing opportunities for all learners, regardless of ability or background",
+                    "Reducing classroom interaction"
+                ],
+                "answer": "Providing opportunities for all learners, regardless of ability or background"
+            },
+            {
+                "question": "What is one advantage of active learning?",
+                "options": [
+                    "Reduces student engagement",
+                    "Encourages surface learning",
+                    "Promotes real-life application",
+                    "Focuses only on memorization"
+                ],
+                "answer": "Promotes real-life application"
+            },
+            {
+                "question": "What is the primary focus of learner-centred teaching?",
+                "options": [
+                    "Teacher authority",
+                    "Student engagement and responsibility",
+                    "Use of strict rules",
+                    "Content memorization"
+                ],
+                "answer": "Student engagement and responsibility"
+            },
+            {
+                "question": "What does learner-centred teaching promote over time?",
+                "options": [
+                    "Student passivity",
+                    "Independent and self-directed learning",
+                    "Teacher control",
+                    "One-size-fits-all teaching"
+                ],
+                "answer": "Independent and self-directed learning"
+            },
+            {
+                "question": "Which of these is NOT part of technical teaching skills?",
+                "options": [
+                    "Using teaching strategies",
+                    "Assessment design",
+                    "Unplanned storytelling",
+                    "Resource selection"
+                ],
+                "answer": "Unplanned storytelling"
+            },
+            {
+                "question": "Which of the following is one of the three domains of the NTS?",
+                "options": [
+                    "Professional Efficiency",
+                    "Curriculum Design",
+                    "Professional Values and Attitudes",
+                    "Classroom Safety Procedures"
+                ],
+                "answer": "Professional Values and Attitudes"
+            },
+            {
+                "question": "How are teaching methods, techniques, and strategies related?",
+                "options": [
+                    "They are used interchangeably",
+                    "Methods guide techniques, which support strategies",
+                    "They contradict each other",
+                    "Only methods matter in teaching"
+                ],
+                "answer": "Methods guide techniques, which support strategies"
+            },
+            {
+                "question": "Which of these is NOT a goal of integrated pedagogies?",
+                "options": [
+                    "Flexibility",
+                    "Personalized learning",
+                    "One-size-fits-all delivery",
+                    "Real-world application"
+                ],
+                "answer": "One-size-fits-all delivery"
+            },
+            {
+                "question": "What do students do in enquiry-based learning?",
+                "options": [
+                    "Follow strict instructions",
+                    "Investigate problems or questions independently",
+                    "Listen and repeat",
+                    "Avoid questioning"
+                ],
+                "answer": "Investigate problems or questions independently"
+            },
+            {
+                "question": "Recitation in a teacher-centred classroom is best described as:",
+                "options": [
+                    "Student discussions",
+                    "Project presentation",
+                    "Question-answer patterns",
+                    "Free writing"
+                ],
+                "answer": "Question-answer patterns"
+            },
+            {
+                "question": "Which factor is important when modifying play for learning?",
+                "options": [
+                    "Popularity of the game",
+                    "Time of day",
+                    "Learning objectives and outcomes",
+                    "Noise level"
+                ],
+                "answer": "Learning objectives and outcomes"
+            },
+            {
+                "question": "A teacher using a learner-centred approach should primarily act as a:",
+                "options": [
+                    "Grader",
+                    "Content deliverer",
+                    "Discussion facilitator",
+                    "Disciplinarian"
+                ],
+                "answer": "Discussion facilitator"
+            },
+            {
+                "question": "What change marked the rise of non-preacher teachers in Ghana?",
+                "options": [
+                    "Religious revival",
+                    "Introduction of evening schools",
+                    "Secularization of education",
+                    "Ban on missionaries"
+                ],
+                "answer": "Secularization of education"
+            },
+            {
+                "question": "The 'Connect' stage in RCA encourages students to:",
+                "options": [
+                    "Link the play to unrelated games",
+                    "Relate experiences to prior knowledge or other contexts",
+                    "Focus on scoring",
+                    "Ignore previous learning"
+                ],
+                "answer": "Relate experiences to prior knowledge or other contexts"
+            },
+            {
+                "question": "What is the first step in preparing for learning?",
+                "options": [
+                    "Starting class without a plan",
+                    "Grading students",
+                    "Setting clear objectives and organizing resources",
+                    "Asking random questions"
+                ],
+                "answer": "Setting clear objectives and organizing resources"
+            },
+            {
+                "question": "Playful learning experiences should be:",
+                "options": [
+                    "Outcome-focused and teacher-controlled",
+                    "Voluntary, engaging, and process-oriented",
+                    "Graded strictly",
+                    "Repeated daily without variation"
+                ],
+                "answer": "Voluntary, engaging, and process-oriented"
+            },
+            {
+                "question": "What is the effect of learner-centred methods on critical thinking?",
+                "options": [
+                    "No effect",
+                    "Suppresses it",
+                    "Encourages and enhances it",
+                    "Depends on the subject"
+                ],
+                "answer": "Encourages and enhances it"
+            },
+            {
+                "question": "The domain of Professional Knowledge emphasizes:",
+                "options": [
+                    "Skill in handling administrative tasks",
+                    "Knowledge of subject content, learners, curriculum, and educational context",
+                    "Preparing teaching schedules",
+                    "Filing reports"
+                ],
+                "answer": "Knowledge of subject content, learners, curriculum, and educational context"
+            },
+            {
+                "question": "Which of these is NOT a teaching skill?",
+                "options": [
+                    "Communication",
+                    "Classroom management",
+                    "Subject mastery",
+                    "Ignoring feedback"
+                ],
+                "answer": "Ignoring feedback"
+            },
+            {
+                "question": "Which domain is best for learning dance or sports skills?",
+                "options": [
+                    "Cognitive",
+                    "Psychomotor",
+                    "Affective",
+                    "Reflective"
+                ],
+                "answer": "Psychomotor"
+            },
+            {
+                "question": "Which domain in Bloom\u2019s Taxonomy addresses motor skills?",
+                "options": [
+                    "Cognitive",
+                    "Affective",
+                    "Psychomotor",
+                    "Social"
+                ],
+                "answer": "Psychomotor"
+            },
+            {
+                "question": "What is play-based learning?",
+                "options": [
+                    "Learning through enjoyable and purposeful play activities",
+                    "Passive entertainment during school hours",
+                    "Strict academic instruction through play",
+                    "Games played only during recess"
+                ],
+                "answer": "Learning through enjoyable and purposeful play activities"
+            },
+            {
+                "question": "Guided discovery learning promotes:",
+                "options": [
+                    "Guesswork",
+                    "Teacher control",
+                    "Deep understanding through exploration and inference",
+                    "Only reading textbooks"
+                ],
+                "answer": "Deep understanding through exploration and inference"
+            },
+            {
+                "question": "Which of the following best describes the NTS stance on assessment?",
+                "options": [
+                    "Assessment should be avoided",
+                    "Only exams matter",
+                    "Assessment should support learning and guide instruction",
+                    "Assessments should be standardized only"
+                ],
+                "answer": "Assessment should support learning and guide instruction"
+            },
+            {
+                "question": "Why might a teacher use the demonstration method?",
+                "options": [
+                    "To avoid direct teaching",
+                    "To help learners observe practical steps",
+                    "To promote debate",
+                    "To reduce lesson planning time"
+                ],
+                "answer": "To help learners observe practical steps"
+            },
+            {
+                "question": "Which method is suitable for teaching large theoretical content?",
+                "options": [
+                    "Role play",
+                    "Lecture method",
+                    "Discussion method",
+                    "Exploration method"
+                ],
+                "answer": "Lecture method"
+            },
+            {
+                "question": "According to the NTS, what must teachers do to support effective learning?",
+                "options": [
+                    "Rely on textbooks",
+                    "Avoid collaboration",
+                    "Use appropriate pedagogy based on learners' needs",
+                    "Stick to the scheme of work"
+                ],
+                "answer": "Use appropriate pedagogy based on learners' needs"
+            },
+            {
+                "question": "What makes teaching both an art and a science?",
+                "options": [
+                    "It involves trial and error",
+                    "It requires following strict procedures",
+                    "It combines creativity with tested methods",
+                    "It is primarily based on intuition"
+                ],
+                "answer": "It combines creativity with tested methods"
+            },
+            {
+                "question": "Problem-based learning enhances which skill the most?",
+                "options": [
+                    "Rote memorization",
+                    "Following instructions",
+                    "Critical thinking",
+                    "Note-taking"
+                ],
+                "answer": "Critical thinking"
+            },
+            {
+                "question": "Sensory play helps learners engage through:",
+                "options": [
+                    "Books only",
+                    "Sound and rhythm",
+                    "Smell, touch, taste, and sight",
+                    "Mental recall"
+                ],
+                "answer": "Smell, touch, taste, and sight"
+            },
+            {
+                "question": "Why are teaching skills important?",
+                "options": [
+                    "They improve administrative tasks",
+                    "They are only relevant for new teachers",
+                    "They enhance the effectiveness of lesson delivery",
+                    "They are optional in modern teaching"
+                ],
+                "answer": "They enhance the effectiveness of lesson delivery"
+            },
+            {
+                "question": "In guided discovery, the teacher primarily:",
+                "options": [
+                    "Gives answers directly",
+                    "Sets up tasks to lead learners to understanding",
+                    "Lectures continuously",
+                    "Avoids interaction"
+                ],
+                "answer": "Sets up tasks to lead learners to understanding"
+=======
                 "question": "Which of the following is a major category of exceptionality in special education?",
                 "options": [
                     "Environmental factors",
@@ -1206,8 +2607,13 @@
                     "Supervising teacher promotion"
                 ],
                 "answer": "Coordinating education for persons with special needs"
+>>>>>>> fbf28f88244a9d5c29241f4813848d0cfb03e464
             }
-        ]
+
+        ];
+
+
+
 
         let currentQuestionIndex = 0;
         let score = 0;
